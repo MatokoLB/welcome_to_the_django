@@ -8,7 +8,7 @@ Sistema Crud desenvolvido em python(django)
 -CMD :manage makemigrations/ migrate
 
 runserver
-!!!-use um super User no primeiro acesso
+#!!!-use um super User no primeiro acesso!!!
 
 
 ## dependências
