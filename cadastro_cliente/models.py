@@ -21,3 +21,13 @@ class Relato(models.Model):
     def __str__(self):
         return self.pedido
 
+class Endereco(models.Model):
+    ecliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    rua = models.CharField(max_length=50)
+    numero = models.CharField(max_length=50)
+    complemento = models.CharField(max_length=50)
+    bairro = models.CharField(max_length=50)
+    cep = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.rua

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rolepermissions.decorators import has_permission_decorator
-from .models import Cliente,Relato
+from .models import Cliente, Endereco,Relato
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -164,4 +164,24 @@ def deletar_relato(request, id ):
     messages.add_message(request, messages.SUCCESS, 'relato excluido')
     return redirect(reverse('lista_cliente'))
 
+
+##endereço dos clietes 
+@has_permission_decorator('cadastrar_cliente')
+def endereco(request):
+    if request.method == "GET":
+        clientes = Cliente.objects.all()
+        return render(request, 'endereco.html', {"clientes": clientes })
+    if request.method == "POST":
+        ecliente = request.POST.get('ecliente')
+        rua = request.POST.get('rua')
+        numero = request.POST.get('numero')
+        complemento = request.POST.get('complemento')
+        bairro = request.POST.get('bairro')
+        cep = request.POST.get('cep')
+        
+    endereco = Endereco.objects.create( ecliente_id = ecliente ,rua=rua,numero=numero,complemento=complemento,bairro=bairro,cep=cep)
+    endereco.save()
+
+    messages.add_message(request, messages.SUCCESS, " endereco salvo")
+    return redirect(reverse('endereco'))
         

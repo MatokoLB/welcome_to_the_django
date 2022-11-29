@@ -17,7 +17,8 @@ def home(resquest):
 # Create your views here.
 
 ##pagina de cadastro funcionarios com pemissoes do rolespemissions
-@has_permission_decorator('cadastrar_funcionario')
+# @has_permission_decorator('cadastrar_funcionario')
+# retirei a permisaso para nao atrapalha o primeiro acesso(necessario a criaçao de um superUser)
 def cadastrar_funcionario(request):
     if request.method == "GET":
         funcionarios = Users.objects.filter(cargo="R")
