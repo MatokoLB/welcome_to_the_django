@@ -1,0 +1,82 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static '/css/css.css' %}">
+  {% block 'head' %}
+
+  {% endblock %}
+  <title>{% block 'title' %} {% endblock %}</title>
+</head>
+
+<body class="bg-primary fundo d-flex flex-column justify-content-center">
+  <header class="mb-5">
+    <div class="container-fluid bg-light d-flex justify-content-around">
+      <nav class="navbar navbar-expand-lg">
+        <div class="">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center ">
+            <li class="nav-item mr-md-5 mr-sm-0">
+              <a class="navlink" aria-current="page" href="{% url 'home' %}">HOME</a>
+            </li>
+            <li class="nav-item mr-md-5 mr-sm-0">
+              <a class="navlink" href="{% url 'lista_cliente' %}">CLIENTES</a>
+            </li>
+            <li class="nav-item mr-md-5 mr-sm-0">
+              <a class="navlink" href="{% url 'relato' %}" >ADICIONAR RELATO</a>
+            </li>
+            <li class="nav-item mr-md-5 mr-sm-0">
+              <a class="navlink" href="{% url 'lista_cliente' %}">DOCUMENTO</a>
+            </li>
+            <li class="nav-item mb-1 ">
+              <button class="botaonav badge-pill "><a href="{% url 'login' %}">LOGIN</a></button>
+            </li>
+            <li class="nav-item mb-1 ">
+              <button class="botaonav badge-pill "><a href="{% url 'logout' %}">LOGOUT</a></button>
+            </li>
+            <li class="nav-item mb-1 ">
+              <button class="botaonav badge-pill "><a href="{% url 'cadastrar_funcionario' %}">
+                CADASTRO DE FUNCIONARIOS</a></button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  
+  <div>
+    {% if messages %}
+    <br>
+    {% for message in messages%}
+    <div class="alert {{message.tags}}">{{message}}</div>
+    {% endfor%}
+    {% endif %}
+</div>
+
+
+
+  {% block 'body' %}
+  
+  {% endblock %}
+
+
+
+
+
+  <footer>
+
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block 'title' %} Atualizar funcionario{% endblock %}
+
+{% block 'body' %}
+
+        <main class="container">
+          <h1 class="text-center mb-5">Editar Infomações do funcionario: {{funcionario.first_name}}</h1>
+  
+          <form action="{% url 'update_funcionario' funcionario.id%}" method="POST"> {% csrf_token %}
+              <div class="form-group">
+                  <label for="nome">Nome</label>
+                  <input value="{{funcionario.first_name}}" name="nome" type="text" 
+                  class="form-control" id="nome" placeholder="nome">
+              </div>
+              <div class="form-group">
+                  <label for="sobrenome">Sobrenome</label>
+                  <input value="{{funcionario.last_name}}" name="sobrenome" type="text" 
+                  class="form-control" id="sobrenome" placeholder="sobrenome">
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input value="{{funcionario.email}}" name="email" type="email" 
+                  class="form-control" id="exampleInputEmail1"
+                      aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+
+              <button type="submit" class="btn btn-success">Update</button>
+          </form>
+      </main>
+  
+      
+      {% endblock %}

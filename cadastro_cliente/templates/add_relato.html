@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block 'title' %} Relatos{% endblock %}
+
+{% block 'body' %}
+
+
+    <main class="container">
+        <h1 class="text-center">Relato</h1>
+
+        <form action="{% url 'relato' %}" method="POST"> {% csrf_token %}
+
+            <div class="form-group ">
+                <label for="pedido">Relato</label>
+                <input name="pedido" type="text" class="form-control" id="pedido" placeholder="pedido">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="detalhes_pedido">Detalhes pedido</label>
+                    <textarea name="detalhes_pedido" class="form-control" id="detalhes_pedido"
+                        placeholder="Infomacoes"></textarea>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for='cliente'>Cliente</label>
+                        <select name='cliente' class="form-control" id="cliente'">
+                        <option disabled selected >Selecionar</option>
+                        {% for cliente in clientes %}
+                        <option value="{{cliente.id}}"> {{cliente.nome}}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+               
+            </div>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </form>
+
+
+    </main>
+
+
+
+{% endblock %}
