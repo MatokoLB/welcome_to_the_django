@@ -65,10 +65,11 @@ def lista_cliente(request):
 class GereratePdf(View):
     def get(self,request, id , *args, **kwargs):
         cliente =  Cliente.objects.get(id=id)
+        endereco = Endereco.objects.filter(ecliente=id).first()
         data = {
       
         }
-        pdf = render_to_pdf('pdf.html',{"cliente": cliente})
+        pdf = render_to_pdf('pdf.html',{"cliente": cliente ,"endereco": endereco })
         if pdf:
             response=HttpResponse(pdf,content_type='application/pdf')
             filename = "Report_for_%s.pdf"
@@ -91,9 +92,12 @@ def deletar_cliente(request, id):
 @has_permission_decorator('cadastrar_cliente')
 def editar_cliente(request, id):
     cliente =  Cliente.objects.get(id=id)
-    ## pega relatos de um unico cliente
+    
+    ## pega relatos de um unico cliente / endereço
     relatos = Relato.objects.filter(cliente=id)
-    return render(request, "update_cliente.html", {"cliente": cliente , "relatos": relatos})
+    enderecos = Endereco.objects.filter(ecliente=id)
+    return render(request, "update_cliente.html", 
+    {"cliente": cliente , "relatos": relatos , "enderecos" : enderecos })
 
 
 @has_permission_decorator('cadastrar_cliente')
@@ -166,6 +170,7 @@ def deletar_relato(request, id ):
 
 
 ##endereço dos clietes 
+
 @has_permission_decorator('cadastrar_cliente')
 def endereco(request):
     if request.method == "GET":
@@ -184,4 +189,42 @@ def endereco(request):
 
     messages.add_message(request, messages.SUCCESS, " endereco salvo")
     return redirect(reverse('endereco'))
-        
+
+
+@has_permission_decorator('cadastrar_cliente')
+def editar_endereco(request, id ):
+    if request.method == "GET":
+        endereco = Endereco.objects.get(id=id)
+        clientes = Cliente.objects.filter(id=id)
+    ## pega relatos de um unico cliente
+        return render(request, "editar_endereco.html", {"clientes": clientes , "endereco": endereco})
+  
+    if request.method == "POST":
+
+      
+        rua = request.POST.get('rua')
+        numero = request.POST.get('numero')
+        complemento = request.POST.get('complemento')
+        bairro = request.POST.get('bairro')
+        cep = request.POST.get('cep')
+      
+
+
+        endereco = Endereco.objects.get(id=id)
+        endereco.rua=rua
+        endereco.numero=numero
+        endereco.complemento=complemento
+        endereco.bairro=bairro
+        endereco.cep=cep
+        endereco.save()
+
+        messages.add_message(request, messages.SUCCESS, "endereço atualizado")
+        return redirect(reverse('endereco'))
+
+    
+@has_permission_decorator('cadastrar_cliente')
+def deletar_endereco(request, id ):
+    endereco = Endereco.objects.get(id=id)
+    endereco.delete()
+    messages.add_message(request, messages.SUCCESS, 'endereço excluido')
+    return redirect(reverse('lista_cliente'))

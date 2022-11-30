@@ -10,8 +10,11 @@
         body {
            
             font-family: verdana;
-            font-size: 20px;
+            font-size: 22px;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -19,13 +22,11 @@
 <body>
 
     <h1>DECLARAÇÃO DE RESIDÊNCIA</h1>
-    <p>Eu,{{cliente.nome}}
-        _________________, CPF nº {{cliente.cpf}}  ,RG nº      {{cliente.rg}}
-        Órgão Exped. ____________, telefone (_____)___________________, na falta de
+    <p>Eu,<b>{{cliente.nome}}</b>, <b>CPF nº {{cliente.cpf}} </b> ,<b>RG nº {{cliente.rg}}</b>,na falta de
         documentos para comprovação de residência, em conformidade com o disposto na Lei
         7.115, de 29 de agosto de 1983, DECLARO para os devidos fins, sob penas da Lei, ser
-        residente e domiciliado no endereço ____________________________________________
-        _________________________________________________________________________</p>
+        residente e domiciliado no endereço, <b>{{endereco.rua}} nº {{endereco.numero}},{{endereco.complemento}}</b>, no 
+        bairro de <b>{{endereco.bairro}} CEP:{{endereco.cep}}</b></p>
     <p>Por ser verdade, firmo a presente declaração para que produza os efeitos
         legais, ciente de que a falsidade de seu conteúdo pode implicar na imputação de sanções
         civis, administrativas, bem como na sanção penal prevista no art. 299 do Código Penal,
@@ -39,9 +40,8 @@
         público e reclusão de 1 (um) a 3 (três) anos, se o documento é particular
     </p>
     <p>___________________________________, ________/________/__________</p>
-    <p>Local Data</p>
-    <p>______________________________________________
-        Assinatura do Declarant</p>
+    <p>______________________________________________</p>
+<p>Assinatura do Declarante</p>
    
 
 </body>

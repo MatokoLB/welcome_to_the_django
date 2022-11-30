@@ -14,4 +14,6 @@ urlpatterns = [
     path('deletar_relato/<int:id>', views.deletar_relato, name="deletar_relato"),
     path('pdf/<int:id>', GereratePdf.as_view(), name="pdf" ),
     path('endereco/', views.endereco, name='endereco' ),
+    path('editar_endereco/<int:id>', views.editar_endereco, name='editar_endereco' ),
+    path('deletar_endereco/<int:id>', views.deletar_endereco, name='deletar_endereco' ),
 ]
